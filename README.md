@@ -1,6 +1,6 @@
 # About
 
-[![CodeFactor](https://www.codefactor.io/repository/github/rowland007/grand-strand-systems/badge/feature/contact)](https://www.codefactor.io/repository/github/rowland007/grand-strand-systems/overview/feature/contact)
+[![CodeFactor](https://www.codefactor.io/repository/github/rowland007/grand-strand-systems/badge/develop)](https://www.codefactor.io/repository/github/rowland007/grand-strand-systems/branches/)
 
 This repo is for a SNHU school project. It is for class CS-320 in demonstrating
 unit testing and uncovering erros in code.
