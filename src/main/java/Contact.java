@@ -1,117 +1,134 @@
 public class Contact {
 
-  private final String contactId;
+  private static final int CONTACT_PHONENUM_LENGTH = 10;
+  private static final byte CONTACT_ID_LENGTH = 10;
+  private static final byte CONTACT_FNAME_LENGTH = 10;
+  private static final byte CONTACT_LNAME_LENGTH = 10;
+  private static final byte CONTACT_ADDRESS_LENGTH = 30;
+  private static final String INITIALIZER = "INITIAL";
+  private static final String INITIALIZER_NUM = "1235559999";
+  private String contactId;
   private String firstName;
   private String lastName;
   private String phoneNumber;
   private String address;
 
-  Contact() { this(null, null, null, null, null); }
+  Contact() {
+    this.contactId = INITIALIZER;
+    this.firstName = INITIALIZER;
+    this.lastName = INITIALIZER;
+    this.phoneNumber = INITIALIZER_NUM;
+    this.address = INITIALIZER;
+  }
 
   Contact(String contactId) {
-    this.contactId = contactId;
-    this.firstName = null;
-    this.lastName = null;
-    this.phoneNumber = null;
-    this.address = null;
+    updateContactId(contactId);
+    this.firstName = INITIALIZER;
+    this.lastName = INITIALIZER;
+    this.phoneNumber = INITIALIZER_NUM;
+    this.address = INITIALIZER;
   }
 
   Contact(String contactId, String firstName) {
-    this.contactId = contactId;
-    this.firstName = firstName;
-    this.lastName = null;
-    this.phoneNumber = null;
-    this.address = null;
+    updateContactId(contactId);
+    updateFirstName(firstName);
+    this.lastName = INITIALIZER;
+    this.phoneNumber = INITIALIZER_NUM;
+    this.address = INITIALIZER;
   }
 
   Contact(String contactId, String firstName, String lastName) {
-    this.contactId = contactId;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.phoneNumber = null;
-    this.address = null;
+    updateContactId(contactId);
+    updateFirstName(firstName);
+    updateLastName(lastName);
+    this.phoneNumber = INITIALIZER_NUM;
+    this.address = INITIALIZER;
   }
 
   Contact(String contactId, String firstName, String lastName,
           String phoneNumber) {
-    this.contactId = contactId;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
-    this.address = null;
+    updateContactId(contactId);
+    updateFirstName(firstName);
+    updateLastName(lastName);
+    updatePhoneNumber(phoneNumber);
+    this.address = INITIALIZER;
   }
 
   Contact(String contactId, String firstName, String lastName,
           String phoneNumber, String address) {
-    this.contactId = contactId;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
-    this.address = address;
+    updateContactId(contactId);
+    updateFirstName(firstName);
+    updateLastName(lastName);
+    updatePhoneNumber(phoneNumber);
+    updateAddress(address);
   }
 
-  @SuppressWarnings("unused")
-  public final String getContactId() {
-    return contactId;
-  }
+  protected final String getContactId() { return contactId; }
 
-  @SuppressWarnings("unused")
-  public final String getFirstName() {
-    return firstName;
-  }
+  protected final String getFirstName() { return firstName; }
 
-  @SuppressWarnings("unused")
-  public final String getLastName() {
-    return lastName;
-  }
+  protected final String getLastName() { return lastName; }
 
-  @SuppressWarnings("unused")
-  public final String getPhoneNumber() {
-    return phoneNumber;
-  }
+  protected final String getPhoneNumber() { return phoneNumber; }
 
-  @SuppressWarnings("unused")
-  public final String getAddress() {
-    return address;
-  }
+  protected final String getAddress() { return address; }
 
-  @SuppressWarnings("unused")
-  public void updateFirstName(String firstName) {
-    if (firstName == null || firstName.length() > 10) {
-      throw new IllegalArgumentException(
-          "Unable to update first name because it is either longer than 10 characters or empty");
+  protected void updateFirstName(String firstName) {
+    if (firstName == null) {
+      throw new IllegalArgumentException("First name cannot be empty");
+    } else if (firstName.length() > CONTACT_FNAME_LENGTH) {
+      throw new IllegalArgumentException("First name cannot be longer than " +
+                                         CONTACT_FNAME_LENGTH + " characters");
     } else {
       this.firstName = firstName;
     }
   }
 
-  @SuppressWarnings("unused")
-  public void updateLastName(String lastName) {
-    if (lastName == null || lastName.length() > 10) {
-      throw new IllegalArgumentException(
-          "Unable to update last name because it is either longer than 10 characters or empty");
+  protected void updateLastName(String lastName) {
+    if (lastName == null) {
+      throw new IllegalArgumentException("Last name cannot be empty");
+    } else if (lastName.length() > CONTACT_LNAME_LENGTH) {
+      throw new IllegalArgumentException("Last name cannot be longer than " +
+                                         CONTACT_LNAME_LENGTH + " characters");
     } else {
       this.lastName = lastName;
     }
   }
 
-  @SuppressWarnings("unused")
-  public void updatePhoneNumber(String phoneNumber) {
-    if (phoneNumber.length() != 10) {
+  protected void updatePhoneNumber(String phoneNumber) {
+    String regex = "[0-9]+";
+    if (phoneNumber.length() != CONTACT_PHONENUM_LENGTH) {
       throw new IllegalArgumentException(
-          "Phone number length invalid. Ensure it is 10 digits.");
+          "Phone number length invalid. Ensure it is " +
+          CONTACT_PHONENUM_LENGTH + " digits.");
+    } else if (!phoneNumber.matches(regex)) {
+      throw new IllegalArgumentException(
+          "Phone number cannot have anything but numbers");
     } else {
       this.phoneNumber = phoneNumber;
     }
   }
 
-  @SuppressWarnings("unused")
-  public void updateAddress(String address) throws NullPointerException {
-    if (address.length() > 30) {
-      throw new IllegalArgumentException(
-          "Address length is invalid. Ensure it is shorter than 30 characters.");
+  protected void updateAddress(String address) {
+    if (address == null) {
+      throw new IllegalArgumentException("Address cannot be empty");
+    } else if (address.length() > CONTACT_ADDRESS_LENGTH) {
+      throw new IllegalArgumentException("Address cannot be longer than " +
+                                         CONTACT_ADDRESS_LENGTH +
+                                         " characters");
     } else {
       this.address = address;
+    }
+  }
+
+  protected void updateContactId(String contactId) {
+    if (contactId == null) {
+      throw new IllegalArgumentException("Contact ID cannot be empty");
+    } else if (contactId.length() > CONTACT_ID_LENGTH) {
+      throw new IllegalArgumentException("Contact ID cannot be longer than " +
+                                         CONTACT_ID_LENGTH + " characters");
+    } else {
+      this.contactId = contactId;
     }
   }
 }
