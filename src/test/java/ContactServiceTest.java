@@ -112,4 +112,5 @@ public class ContactServiceTest {
         assertThrows(IllegalArgumentException.class, () -> service.updateAddress(service.getContactList().get(0).getContactId(), null));
         assertThrows(Exception.class, () -> service.updateAddress(contactId, addressTest));
     }
+
 }
