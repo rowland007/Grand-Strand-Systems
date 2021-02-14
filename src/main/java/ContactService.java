@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Randall Rowland
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

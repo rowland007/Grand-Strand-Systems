@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Randall Rowland
+ */
+
 public class Contact {
 
   private static final int CONTACT_PHONENUM_LENGTH = 10;

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Randall Rowland
+ */
+
 public class Task {
 
   private String taskId;

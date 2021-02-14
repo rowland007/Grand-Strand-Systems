@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Randall Rowland
+ */
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
