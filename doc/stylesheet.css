@@ -105,12 +105,12 @@ button {
  */
 .clear {
     clear:both;
-    height:0px;
+    height:0;
     overflow:hidden;
 }
 .about-language {
     float:right;
-    padding:0px 21px;
+    padding:0 21px;
     font-size:11px;
     z-index:200;
     margin-top:-9px;
@@ -198,7 +198,7 @@ ul.nav-list li{
 }
 .sub-nav .nav-list-search {
     float:right;
-    margin:0 0 0 0;
+    margin:0;
     padding:5px 6px;
     clear:none;
 }
@@ -248,10 +248,10 @@ ul.sub-nav-list li {
     margin:10px 0;
 }
 .sub-title {
-    margin:5px 0 0 0;
+    margin:5px 0 0;
 }
 .header ul {
-    margin:0 0 15px 0;
+    margin:0 0 15px;
     padding:0;
 }
 .header ul li, .footer ul li {
@@ -289,11 +289,11 @@ dl.notes > dt {
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
     font-size:12px;
     font-weight:bold;
-    margin:10px 0 0 0;
+    margin:10px 0 0;
     color:#4E4E4E;
 }
 dl.notes > dd {
-    margin:5px 0 10px 0px;
+    margin:5px 0 10px;
     font-size:14px;
     font-family:'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
 }
@@ -329,7 +329,7 @@ ul.block-list,
 ul.details-list,
 ul.member-list,
 ul.summary-list {
-    margin:10px 0 10px 0;
+    margin:10px 0;
     padding:0;
 }
 ul.block-list > li,
@@ -357,7 +357,7 @@ table tr td dl, table tr td dl dt, table tr td dl dd {
 }
 .overview-summary table, .member-summary table, .requires-summary table, .packages-summary table,
 .provides-summary table, .uses-summary table, .system-properties-summary table {
-    padding:0px;
+    padding:0;
 }
 .overview-summary caption, .member-summary caption, .type-summary caption,
 .use-summary caption, .constants-summary caption, .deprecated-summary caption,
@@ -370,10 +370,10 @@ table tr td dl, table tr td dl dt, table tr td dl dd {
     font-weight:bold;
     clear:none;
     overflow:hidden;
-    padding:0px;
+    padding:0;
     padding-top:10px;
     padding-left:1px;
-    margin:0px;
+    margin:0;
     white-space:pre;
 }
 .constants-summary caption a:link, .constants-summary caption a:visited,
@@ -417,7 +417,7 @@ table tr td dl, table tr td dl dt, table tr td dl dd {
 div.table-tabs > button {
    border: none;
    cursor: pointer;
-   padding: 5px 12px 7px 12px;
+   padding: 5px 12px 7px;
    font-weight: bold;
    margin-right: 3px;
 }
@@ -439,13 +439,13 @@ div.table-tabs > button.table-tab {
 .requires-summary td, .packages-summary td, .provides-summary td,
 .uses-summary td, .system-properties-summary td {
     text-align:left;
-    padding:0px 0px 12px 10px;
+    padding:0 0 12px 10px;
 }
 th.col-first, th.col-second, th.col-last, th.col-constructor-name, th.col-deprecated-item-name, .use-summary th,
 .constants-summary th, .packages-summary th, td.col-first, td.col-second, td.col-last, .use-summary td,
 .constants-summary td, .system-properties-summary th {
     vertical-align:top;
-    padding-right:0px;
+    padding-right:0;
     padding-top:8px;
     padding-bottom:3px;
 }
@@ -517,7 +517,7 @@ div.block {
     font-family:'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
 }
 td.col-last div {
-    padding-top:0px;
+    padding-top:0;
 }
 td.col-last a {
     padding-bottom:3px;
@@ -642,7 +642,7 @@ ul.ui-autocomplete  li {
     position:relative;
     left:-4px;
     top:-4px;
-    font-size:0px;
+    font-size:0;
 }
 .watermark {
     color:#545454;
@@ -668,14 +668,14 @@ ul.ui-autocomplete  li {
     z-index: 1;
 }
 .inherited-list {
-    margin: 10px 0 10px 0;
+    margin: 10px 0;
 }
 section.description {
     line-height: 1.4;
 }
 .summary section[class$="-summary"], .details section[class$="-details"],
 .class-uses .detail, .serialized-class-details {
-    padding: 0px 20px 5px 10px;
+    padding: 0 20px 5px 10px;
     border: 1px solid #ededed;
     background-color: #f8f8f8;
 }
