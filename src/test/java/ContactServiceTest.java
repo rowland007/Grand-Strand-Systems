@@ -1,7 +1,5 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,179 +25,194 @@ public class ContactServiceTest {
   }
 
   @Test
-  void ContactServiceConstructorTest() {
-    ContactService service = new ContactService();
-    Assertions.assertNotNull(service.getContactList().get(0).getContactId());
-  }
-
-  @Test
-  void ContactServiceConstructorIdLengthTest() {
-    ContactService service = new ContactService();
-    Assertions.assertTrue(
-        service.getContactList().get(0).getContactId().length() <= 10);
-  }
-
-  @Test
-  void ContactServiceConstructorFirstNameTest() {
-    ContactService service = new ContactService(firstNameTest);
-    assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
-  }
-
-  @Test
-  void ContactServiceConstructorFullNameTest() {
-    ContactService service = new ContactService(firstNameTest, lastNameTest);
-    assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
-    assertEquals(lastNameTest, service.getContactList().get(0).getLastName());
-  }
-
-  @Test
-  void ContactServiceConstructorFullNameAndNumberTest() {
-    ContactService service =
-        new ContactService(firstNameTest, lastNameTest, phoneNumberTest);
-    assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
-    assertEquals(lastNameTest, service.getContactList().get(0).getLastName());
-    assertEquals(phoneNumberTest,
-                 service.getContactList().get(0).getPhoneNumber());
-  }
-
-  @Test
-  void ContactServiceConstructorIntializeEverythingTest() {
-    ContactService service = new ContactService(firstNameTest, lastNameTest,
-                                                phoneNumberTest, addressTest);
-    assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
-    assertEquals(lastNameTest, service.getContactList().get(0).getLastName());
-    assertEquals(phoneNumberTest,
-                 service.getContactList().get(0).getPhoneNumber());
-    assertEquals(addressTest, service.getContactList().get(0).getAddress());
-  }
-
-  @Test
   void newContactTest() {
     ContactService service = new ContactService();
-    Contact tempContactObject = service.newContact();
-    Assertions.assertNotEquals(tempContactObject.getContactId(),
-                               service.getContactList().get(0).getContactId());
-  }
-
-  @Test
-  void newContactUpdateTest() {
-    ContactService service = new ContactService();
-    Contact tempContactObject = service.newContact();
-    Assertions.assertNotNull(tempContactObject.getContactId());
-    Assertions.assertNull(tempContactObject.getFirstName());
-    Assertions.assertNull(tempContactObject.getLastName());
-    Assertions.assertNull(tempContactObject.getPhoneNumber());
-    Assertions.assertNull(tempContactObject.getAddress());
-    tempContactObject.updateFirstName(firstNameTest);
-    tempContactObject.updateLastName(lastNameTest);
-    tempContactObject.updatePhoneNumber(phoneNumberTest);
-    tempContactObject.updateAddress(addressTest);
-    assertEquals(firstNameTest, tempContactObject.getFirstName());
-    assertEquals(lastNameTest, tempContactObject.getLastName());
-    assertEquals(phoneNumberTest, tempContactObject.getPhoneNumber());
-    assertEquals(addressTest, tempContactObject.getAddress());
-  }
-
-  @Test
-  void updateContactUpdateListTest() {
-    ContactService service = new ContactService();
-    Contact tempContactObject = service.newContact();
-    Assertions.assertNotNull(tempContactObject.getContactId());
-    Assertions.assertNull(tempContactObject.getFirstName());
-    Assertions.assertNull(tempContactObject.getLastName());
-    Assertions.assertNull(tempContactObject.getPhoneNumber());
-    Assertions.assertNull(tempContactObject.getAddress());
-    service.getContactList().get(0).updateFirstName(firstNameTest);
-    service.getContactList().get(0).updateLastName(lastNameTest);
-    service.getContactList().get(0).updatePhoneNumber(phoneNumberTest);
-    service.getContactList().get(0).updateAddress(addressTest);
-    assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
-    assertEquals(lastNameTest, service.getContactList().get(0).getLastName());
-    assertEquals(phoneNumberTest,
-                 service.getContactList().get(0).getPhoneNumber());
-    assertEquals(addressTest, service.getContactList().get(0).getAddress());
-  }
-
-  @Test
-  void multipleNewContactTest() {
-    ContactService service = new ContactService(
-        tooLongFirstName, tooLongLastName, tooLongPhoneNumber, tooLongAddress);
-    Contact tempContact1 = service.newContact();
-    Contact tempContact2 = service.newContact();
-    Assertions.assertNotEquals(tempContact1.getContactId(),
-                               service.getContactList().get(0).getContactId());
-    Assertions.assertNotEquals(tempContact2.getContactId(),
-                               service.getContactList().get(0).getContactId());
-    Assertions.assertNotEquals(tempContact1.getContactId(),
-                               tempContact2.getContactId());
-    Assertions.assertTrue(service.getContactList().size() >= 2);
-    Assertions.assertNotEquals(service.getContactList().get(0).getContactId(),
-                               service.getContactList().get(1).getContactId());
-    Assertions.assertNotEquals(service.getContactList().get(0).getContactId(),
-                               service.getContactList().get(2).getContactId());
-    Assertions.assertNotEquals(service.getContactList().get(1).getContactId(),
-                               service.getContactList().get(2).getContactId());
+    service.newContact();
+    assertAll(
+        "service",
+        ()
+            -> assertNotNull(service.getContactList().get(0).getContactId()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(0).getFirstName()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(0).getLastName()),
+        ()
+            -> assertEquals("1235559999",
+                            service.getContactList().get(0).getPhoneNumber()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(0).getAddress()));
+    service.newContact(firstNameTest);
+    assertAll(
+        "service",
+        ()
+            -> assertNotNull(service.getContactList().get(1).getContactId()),
+        ()
+            -> assertEquals(firstNameTest,
+                            service.getContactList().get(1).getFirstName()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(1).getLastName()),
+        ()
+            -> assertEquals("1235559999",
+                            service.getContactList().get(1).getPhoneNumber()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(1).getAddress()));
+    service.newContact(firstNameTest, lastNameTest);
+    assertAll(
+        "service",
+        ()
+            -> assertNotNull(service.getContactList().get(2).getContactId()),
+        ()
+            -> assertEquals(firstNameTest,
+                            service.getContactList().get(2).getFirstName()),
+        ()
+            -> assertEquals(lastNameTest,
+                            service.getContactList().get(2).getLastName()),
+        ()
+            -> assertEquals("1235559999",
+                            service.getContactList().get(2).getPhoneNumber()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(2).getAddress()));
+    service.newContact(firstNameTest, lastNameTest, phoneNumberTest);
+    assertAll(
+        "service",
+        ()
+            -> assertNotNull(service.getContactList().get(3).getContactId()),
+        ()
+            -> assertEquals(firstNameTest,
+                            service.getContactList().get(3).getFirstName()),
+        ()
+            -> assertEquals(lastNameTest,
+                            service.getContactList().get(3).getLastName()),
+        ()
+            -> assertEquals(phoneNumberTest,
+                            service.getContactList().get(3).getPhoneNumber()),
+        ()
+            -> assertEquals("INITIAL",
+                            service.getContactList().get(3).getAddress()));
+    service.newContact(firstNameTest, lastNameTest, phoneNumberTest,
+                       addressTest);
+    assertAll(
+        "service",
+        ()
+            -> assertNotNull(service.getContactList().get(4).getContactId()),
+        ()
+            -> assertEquals(firstNameTest,
+                            service.getContactList().get(4).getFirstName()),
+        ()
+            -> assertEquals(lastNameTest,
+                            service.getContactList().get(4).getLastName()),
+        ()
+            -> assertEquals(phoneNumberTest,
+                            service.getContactList().get(4).getPhoneNumber()),
+        ()
+            -> assertEquals(addressTest,
+                            service.getContactList().get(4).getAddress()));
   }
 
   @Test
   void deleteContactTest() {
-    ContactService service = new ContactService(
-        tooLongFirstName, tooLongLastName, tooLongPhoneNumber, tooLongAddress);
-    Contact tempContact1 = service.newContact();
-    Contact tempContact2 = service.newContact();
-    service.getContactList().get(1).updateFirstName(firstNameTest);
-    service.getContactList().get(1).updateLastName(lastNameTest);
-    service.getContactList().get(1).updatePhoneNumber(phoneNumberTest);
-    service.getContactList().get(1).updateAddress(addressTest);
-    assertEquals(tooLongFirstName,
-                 service.getContactList().get(0).getFirstName());
-    assertEquals(tooLongLastName,
-                 service.getContactList().get(0).getLastName());
-    assertEquals(tooLongPhoneNumber,
-                 service.getContactList().get(0).getPhoneNumber());
-    assertEquals(tooLongAddress, service.getContactList().get(0).getAddress());
-    assertEquals(firstNameTest, service.getContactList().get(1).getFirstName());
-    assertEquals(lastNameTest, service.getContactList().get(1).getLastName());
-    assertEquals(phoneNumberTest,
-                 service.getContactList().get(1).getPhoneNumber());
-    assertEquals(addressTest, service.getContactList().get(1).getAddress());
-    service.deleteContact(service.getContactList().get(0));
+    ContactService service = new ContactService();
+    service.newContact();
+    assertThrows(Exception.class, () -> service.deleteContact(contactId));
+    assertAll(()
+                  -> service.deleteContact(
+                      service.getContactList().get(0).getContactId()));
+  }
+
+  @Test
+  void updateFirstNameTest() throws Exception {
+    ContactService service = new ContactService();
+    service.newContact();
+    service.updateFirstName(service.getContactList().get(0).getContactId(),
+                            firstNameTest);
     assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updateFirstName(
+                         service.getContactList().get(0).getContactId(),
+                         tooLongFirstName));
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updateFirstName(
+                         service.getContactList().get(0).getContactId(), null));
+    assertThrows(Exception.class,
+                 () -> service.updateFirstName(contactId, firstNameTest));
+  }
+
+  @Test
+  void updateLastNameTest() throws Exception {
+    ContactService service = new ContactService();
+    service.newContact();
+    service.updateLastName(service.getContactList().get(0).getContactId(),
+                           lastNameTest);
     assertEquals(lastNameTest, service.getContactList().get(0).getLastName());
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updateLastName(
+                         service.getContactList().get(0).getContactId(),
+                         tooLongLastName));
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updateLastName(
+                         service.getContactList().get(0).getContactId(), null));
+    assertThrows(Exception.class,
+                 () -> service.updateLastName(contactId, lastNameTest));
+  }
+
+  @Test
+  void updatePhoneNumberTest() throws Exception {
+    ContactService service = new ContactService();
+    service.newContact();
+    service.updatePhoneNumber(service.getContactList().get(0).getContactId(),
+                              phoneNumberTest);
     assertEquals(phoneNumberTest,
                  service.getContactList().get(0).getPhoneNumber());
-    assertEquals(addressTest, service.getContactList().get(0).getAddress());
-  }
-
-  @Test
-  void updateFirstNameTest() {
-    ContactService service = new ContactService();
-    service.updateFirstName(service.getContactList().get(0), firstNameTest);
-    assertEquals(firstNameTest, service.getContactList().get(0).getFirstName());
-  }
-
-  @Test
-  void updateLastNameTest() {
-    ContactService service = new ContactService();
-    service.updateLastName(service.getContactList().get(0), lastNameTest);
-    assertEquals(lastNameTest, service.getContactList().get(0).getLastName());
-  }
-
-  @Test
-  void updatePhoneNumberTest() {
-    ContactService service = new ContactService();
-    service.updatePhoneNumber(service.getContactList().get(0), phoneNumberTest);
-    assertEquals(phoneNumberTest,
-                 service.getContactList().get(0).getPhoneNumber());
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updatePhoneNumber(
+                         service.getContactList().get(0).getContactId(),
+                         tooLongPhoneNumber));
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updatePhoneNumber(
+                         service.getContactList().get(0).getContactId(),
+                         tooShortPhoneNumber));
     assertThrows(
         IllegalArgumentException.class,
-        () -> service.getContactList().get(0).updatePhoneNumber(contactId));
+        ()
+            -> service.updatePhoneNumber(
+                service.getContactList().get(0).getContactId(), contactId));
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updatePhoneNumber(
+                         service.getContactList().get(0).getContactId(), null));
+    assertThrows(Exception.class,
+                 () -> service.updatePhoneNumber(contactId, lastNameTest));
   }
 
   @Test
-  void updateAddressTest() {
+  void updateAddressTest() throws Exception {
     ContactService service = new ContactService();
-    service.updateAddress(service.getContactList().get(0), addressTest);
+    service.newContact();
+    service.updateAddress(service.getContactList().get(0).getContactId(),
+                          addressTest);
     assertEquals(addressTest, service.getContactList().get(0).getAddress());
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updateAddress(
+                         service.getContactList().get(0).getContactId(),
+                         tooLongAddress));
+    assertThrows(IllegalArgumentException.class,
+                 ()
+                     -> service.updateAddress(
+                         service.getContactList().get(0).getContactId(), null));
+    assertThrows(Exception.class,
+                 () -> service.updateAddress(contactId, addressTest));
   }
 }

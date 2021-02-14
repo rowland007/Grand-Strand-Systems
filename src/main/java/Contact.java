@@ -97,7 +97,9 @@ public class Contact {
 
   protected void updatePhoneNumber(String phoneNumber) {
     String regex = "[0-9]+";
-    if (phoneNumber.length() != CONTACT_PHONENUM_LENGTH) {
+    if (phoneNumber == null) {
+      throw new IllegalArgumentException("Phone number cannot be empty.");
+    } else if (phoneNumber.length() != CONTACT_PHONENUM_LENGTH) {
       throw new IllegalArgumentException(
           "Phone number length invalid. Ensure it is " +
           CONTACT_PHONENUM_LENGTH + " digits.");
