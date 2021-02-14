@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 Randall Rowland
+ */
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
